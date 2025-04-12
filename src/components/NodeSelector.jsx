@@ -1,13 +1,19 @@
 import React from 'react';
 
-export default function NodeSelector({ nodes, onSelect }) {
+export default function NodeSelector({ nodes, selectedNodes, onToggle }) {
   return (
-    <select onChange={(e) => onSelect(e.target.value)} className="p-2 border rounded">
+    <div className="space-y-1">
       {nodes.map((node) => (
-        <option key={node.node_id} value={node.node_id}>
+        <label key={node.node_id} className="block">
+          <input
+            type="checkbox"
+            checked={selectedNodes.includes(node.node_id)}
+            onChange={() => onToggle(node.node_id)}
+            className="mr-2"
+          />
           {node.node_id}
-        </option>
+        </label>
       ))}
-    </select>
+    </div>
   );
 }
