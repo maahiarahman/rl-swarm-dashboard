@@ -10,16 +10,16 @@ import ModelPerformance from './pages/ModelPerformance';
 export default function App() {
   return (
     <Router>
-      <div className="flex">
+      <div className="app-container">
         <Sidebar />
-        <div className="flex-1 bg-gray-50 min-h-screen">
+        <main>
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/node-view/:nodeId" element={<NodeView />} />
             <Route path="/model-performance" element={<ModelPerformance />} />
-            <Route path="*" element={<div className="p-6 text-red-600">404 – Not Found</div>} />
+            <Route path="*" element={<div className="p-6 text-red-500">404 – Not Found</div>} />
           </Routes>
-        </div>
+        </main>
       </div>
     </Router>
   );
