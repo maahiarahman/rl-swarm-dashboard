@@ -4,6 +4,7 @@ import NodeSelector from './NodeSelector';
 import RewardChart from './RewardChart';
 import RegretChart from './RegretChart';
 import PromptViewer from './PromptViewer';
+import ConsensusViewer from './ConsensusViewer';
 
 export default function Dashboard() {
   const [selectedNodeIds, setSelectedNodeIds] = useState([data.nodes[0].node_id]);
@@ -20,9 +21,13 @@ export default function Dashboard() {
     selectedNodeIds.includes(n.node_id)
   );
 
+  // ✅ Add this line to pull the consensus object
+  const consensusData = data.consensus;
+
   return (
     <div className="p-6 space-y-6">
       <h1 className="text-2xl font-bold mb-4">🧠 RL Swarm Dashboard</h1>
+
       <NodeSelector
         nodes={data.nodes}
         selectedNodes={selectedNodeIds}
@@ -35,6 +40,14 @@ export default function Dashboard() {
       </div>
 
       {selectedNodes[0] && <PromptViewer answers={selectedNodes[0].answers} />}
+      
+      {/* ✅ Add this to show swarm consensus */}
+      {selectedNodes[0] && (
+        <ConsensusViewer
+          answers={selectedNodes[0].answers}
+          consensus={consensusData}
+        />
+      )}
     </div>
   );
 }

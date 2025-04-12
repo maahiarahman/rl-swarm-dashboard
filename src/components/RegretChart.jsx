@@ -4,9 +4,14 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
 export default function RegretChart({ nodes }) {
   const chartData = nodes[0].regret.map((_, i) => {
     const point = { step: i + 1 };
+
+    let swarmSum = 0;
     nodes.forEach((node) => {
       point[node.node_id] = node.regret[i];
+      swarmSum += node.regret[i];
     });
+
+    point["Swarm Avg"] = swarmSum / nodes.length;
     return point;
   });
 
@@ -27,6 +32,13 @@ export default function RegretChart({ nodes }) {
             dot={{ r: 3 }}
           />
         ))}
+        <Line
+          type="monotone"
+          dataKey="Swarm Avg"
+          stroke="#fbbf24"
+          strokeDasharray="5 5"
+          dot={false}
+        />
       </LineChart>
     </div>
   );

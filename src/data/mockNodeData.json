@@ -18,6 +18,10 @@
           { "prompt": "What is 9 x 6?", "answer": "54", "correct": true }
         ]
       }
-    ]
+    ],
+    "consensus": {
+      "What is 7 + 5?": "12",
+      "What is 9 x 6?": "54"
+    }
   }
   

@@ -4,9 +4,14 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
 export default function RewardChart({ nodes }) {
   const chartData = nodes[0].rewards.map((_, i) => {
     const point = { step: i + 1 };
+
+    let swarmSum = 0;
     nodes.forEach((node) => {
       point[node.node_id] = node.rewards[i];
+      swarmSum += node.rewards[i];
     });
+
+    point["Swarm Avg"] = swarmSum / nodes.length;
     return point;
   });
 
@@ -27,6 +32,13 @@ export default function RewardChart({ nodes }) {
             dot={{ r: 3 }}
           />
         ))}
+        <Line
+          type="monotone"
+          dataKey="Swarm Avg"
+          stroke="#6366f1"
+          strokeDasharray="5 5"
+          dot={false}
+        />
       </LineChart>
     </div>
   );
