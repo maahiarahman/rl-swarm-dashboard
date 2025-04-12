@@ -1,0 +1,23 @@
+{
+    "nodes": [
+      {
+        "node_id": "node_1",
+        "rewards": [0.1, 0.3, 0.45, 0.6, 0.5],
+        "regret": [0.05, 0.04, 0.03, 0.02, 0.01],
+        "answers": [
+          { "prompt": "What is 7 + 5?", "answer": "12", "correct": true },
+          { "prompt": "What is 9 x 6?", "answer": "54", "correct": true }
+        ]
+      },
+      {
+        "node_id": "node_2",
+        "rewards": [0.2, 0.25, 0.4, 0.5, 0.45],
+        "regret": [0.04, 0.03, 0.02, 0.02, 0.01],
+        "answers": [
+          { "prompt": "What is 7 + 5?", "answer": "13", "correct": false },
+          { "prompt": "What is 9 x 6?", "answer": "54", "correct": true }
+        ]
+      }
+    ]
+  }
+  
