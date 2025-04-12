@@ -3,11 +3,11 @@
 body {
   font-family: 'Space Grotesk', sans-serif;
   background-color: #000000;
-  color: #f3ede8; /* accessible light cream */
+  color: #f3ede8;
   margin: 0;
 }
 
-/* Global text settings */
+/* Universal Text */
 * {
   font-family: 'Space Grotesk', sans-serif;
   color: #f3ede8;
@@ -16,19 +16,22 @@ body {
 /* Headings */
 h1, h2, h3 {
   font-weight: 700;
-  color: #f8dfc6; /* gensyn pastel pink */
+  color: #f8dfc6;
   text-shadow: 0 0 4px rgba(248, 223, 198, 0.1);
   letter-spacing: -0.015em;
 }
-h1 {
-  font-size: 2.5rem;
+h1 { font-size: 2.5rem; }
+h2 { font-size: 1.75rem; }
+.card h2 {
+  font-size: 1.3rem;
+  color: #f8dfc6;
+  margin-bottom: 1rem;
 }
-h2 {
-  font-size: 1.75rem;
-}
+
+/* App Layout */
 .app-container {
   display: flex;
-  background-color: #000; /* Main app background */
+  background-color: #000;
 }
 main {
   padding: 2rem;
@@ -39,8 +42,8 @@ main {
 
 /* Sidebar */
 .sidebar {
-  background-color: #0a0a0a; /* slightly lighter than full black */
-  border-right: 1px solid #ffffff1a;
+  background-color: #2d2d2d;
+  border-right: 1px solid #c6bbbb1a;
   padding: 1.5rem;
   min-height: 100vh;
 }
@@ -67,57 +70,93 @@ main {
   border-left: 3px solid #fff;
 }
 
-/* Main layout wrapper */
-.app-container {
-  display: flex;
-  background-color: #000000;
-}
-main {
-  padding: 2rem;
-  flex-grow: 1;
-  background-color: #000000;
-}
-
 /* Buttons */
-button {
+button, .btn {
   font-weight: 600;
   font-family: 'Space Grotesk', sans-serif;
   background-color: #7032ff;
-  color: white;
+  color: #f3ede8;
   padding: 0.5rem 1rem;
   border-radius: 0.375rem;
   transition: background 0.3s ease;
   border: none;
 }
-button:hover {
+button:hover, .btn:hover {
   background-color: #965eff;
 }
 
-/* Chart Containers + Cards */
-.card, .recharts-wrapper {
-  background-color: #121212;
-  border: 1px solid #2a2a2a;
-  border-radius: 0.5rem;
-  padding: 1rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 2px 8px #00000070;
-}
-
-/* Tooltip */
-.recharts-tooltip-wrapper {
+/* Tooltips */
+.recharts-tooltip-wrapper,
+.recharts-default-tooltip {
   background-color: #000 !important;
+  color: #f3ede8 !important;
+  border: 1px solid #2a2a2a !important;
+  padding: 0.5rem !important;
+}
+.recharts-tooltip-label {
   color: #f8dfc6 !important;
 }
+.recharts-tooltip-item {
+  color: #f3ede8 !important;
+}
 
-/* Labels, Inputs */
-label, input, select {
+/* Recharts Axis Text */
+.recharts-cartesian-axis-tick-value {
+  fill: #f3ede8 !important;
+}
+.recharts-layer .recharts-text {
+  fill: #f3ede8 !important;
+}
+
+/* Cards and Chart Panels */
+.card,
+.recharts-wrapper,
+.answer-card,
+.consensus-card,
+.prompt-card,
+.critique-card {
+  background-color: #111 !important;
+  border: 1px solid #2a2a2a;
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.05);
   color: #f3ede8;
 }
 
-/* Table */
+/* Fix ALL inner text */
+.card *,
+.answer-card *,
+.consensus-card *,
+.prompt-card *,
+.critique-card * {
+  color: #f3ede8 !important;
+}
+
+/* Emphasis */
+strong {
+  color: #f8dfc6;
+  font-weight: 600;
+}
+
+/* Correct label */
+.correct-answer {
+  color: #10b981;
+  font-weight: 600;
+}
+
+/* Chart captions, small print */
+.card p,
+.card small,
+.caption,
+.text-sm {
+  color: #f8dfc6 !important;
+}
+
+/* Tables */
 table {
   width: 100%;
-  background-color: #111;
+  background-color: #0e0e0e !important;
   color: #f3ede8;
   border-collapse: collapse;
 }
@@ -131,66 +170,37 @@ td, th {
 tr:nth-child(even) {
   background-color: #151515;
 }
-/* Answer Cards */
-.answer-card, .consensus-card {
-  background-color: #111; /* soft black for visibility */
-  border: 1px solid #2a2a2a;
-  border-radius: 0.5rem;
-  padding: 1.25rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 0 4px rgba(255, 255, 255, 0.05);
+tr:hover {
+  background-color: #1e1e1e;
+}
+
+/* Inputs & Labels */
+label, input, select {
   color: #f3ede8;
+  background-color: #0a0a0a;
+  border: 1px solid #333;
+  padding: 0.5rem;
 }
 
-/* Inside each card, text contrast */
-.answer-card p,
-.consensus-card p,
-.answer-card span,
-.consensus-card span {
-  color: #ddd;
-}
-
-/* Optional: success checkmark */
-.correct-answer {
-  color: #10b981;
-  font-weight: 600;
-}
-/* Fix washed-out prompt & consensus cards */
-.prompt-card,
-.consensus-card {
-  background-color: #111111; /* match rest of app */
+/* Links */
+a {
   color: #f3ede8;
-  border: 1px solid #2a2a2a;
-  padding: 1.25rem;
-  border-radius: 0.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 0 4px rgba(255, 255, 255, 0.05);
+  text-decoration: none;
 }
-
-/* Improve nested text inside */
-.prompt-card p,
-.consensus-card p,
-.prompt-card span,
-.consensus-card span {
-  color: #f3ede8;
-  font-weight: 400;
-}
-
-/* Fix text contrast for emphasis */
-.prompt-card strong,
-.consensus-card strong {
+a:hover {
   color: #f8dfc6;
-  font-weight: 600;
+  text-decoration: underline;
 }
 
-/* Fix green label styling */
-.correct-answer {
-  color: #10b981;
-  font-weight: 600;
-}
-/* New chart addition styles */
-.card h2 {
-  font-size: 1.3rem;
+/* Captions below charts */
+.chart-caption {
+  font-size: 0.9rem;
   color: #f8dfc6;
-  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* Reinforce containers */
+div, section, article, aside, .container, .box, .MuiPaper-root {
+  background-color: #000000 !important;
+  color: #f3ede8 !important;
 }

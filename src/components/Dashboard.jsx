@@ -44,7 +44,13 @@ export default function Dashboard() {
 
   return (
     <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold mb-4">🧠 RL Swarm Dashboard</h1>
+      <h1 className="text-2xl font-bold text-[#f8dfc6]">🧠 RL Swarm Dashboard</h1>
+
+      <div className="text-base max-w-3xl leading-relaxed text-gray-300">
+        <p>
+          <strong className="text-[#f8dfc6]">RL Swarm Dashboard</strong> is an interactive tool designed to visualize the training process of reinforcement learning agents working collaboratively. It tracks their answers, voting consensus, peer critiques, and model performance across multiple stages.
+        </p>
+      </div>
 
       <NodeSelector
         nodes={data.nodes}
@@ -55,28 +61,34 @@ export default function Dashboard() {
       <div className="flex items-center gap-4">
         <button
           onClick={() => setIsPlaying((prev) => !prev)}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          className="bg-[#7032ff] text-white px-4 py-2 rounded hover:bg-[#965eff]"
         >
           {isPlaying ? '⏸ Pause' : '▶️ Play Training'}
         </button>
-        <span className="text-gray-700">Step: {step}</span>
+        <span className="text-gray-400">Step: {step}</span>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <RewardChart nodes={selectedNodes} step={step} />
-        <RegretChart nodes={selectedNodes} step={step} />
+        <div className="card">
+          <RewardChart nodes={selectedNodes} step={step} />
+        </div>
+        <div className="card">
+          <RegretChart nodes={selectedNodes} step={step} />
+        </div>
       </div>
 
-      <AnswerLengthChart nodes={selectedNodes} step={step} />
+      <div className="card">
+        <AnswerLengthChart nodes={selectedNodes} step={step} />
+      </div>
 
-      <div className="border-t pt-4 mt-4">
-        <h2 className="text-lg font-semibold mb-2">Explore Individual Nodes</h2>
+      <div className="border-t border-gray-700 pt-4 mt-4">
+        <h2 className="text-lg font-semibold text-[#f8dfc6] mb-2">Explore Individual Nodes</h2>
         <div className="flex flex-wrap gap-4">
           {data.nodes.map((node) => (
             <button
               key={node.node_id}
               onClick={() => navigate(`/node-view/${node.node_id}`)}
-              className="text-blue-600 underline text-sm"
+              className="bg-[#7032ff] text-white px-4 py-2 rounded hover:bg-[#965eff] text-sm"
             >
               View {node.node_id}
             </button>
