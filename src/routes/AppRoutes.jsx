@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Dashboard from '../pages/Dashboard';
+import Dashboard from '../components/Dashboard';
 import NodeView from '../pages/NodeView';
 import ModelPerformance from '../pages/ModelPerformance';
 

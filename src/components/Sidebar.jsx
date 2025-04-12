@@ -1,12 +1,14 @@
 import { Link, useLocation } from 'react-router-dom';
+import data from '../data/mockNodeData.json';
 
 export default function Sidebar() {
   const location = useLocation();
+  const firstNode = data.nodes[0]?.node_id || 'node_1';
 
   const navItems = [
-    { label: 'Dashboard', to: '/' },
-    { label: 'Node View', to: '/node-view' },
-    { label: 'Model Performance', to: '/model-performance' },
+    { label: '🧠 Dashboard', to: '/' },
+    { label: '🔍 Node View', to: `/node-view/${firstNode}` },
+    { label: '📈 Model Performance', to: '/model-performance' },
   ];
 
   return (
@@ -18,7 +20,7 @@ export default function Sidebar() {
             key={to}
             to={to}
             className={`block px-2 py-1 rounded ${
-              location.pathname === to ? 'bg-gray-700' : 'hover:bg-gray-800'
+              location.pathname.startsWith(to) ? 'bg-gray-700' : 'hover:bg-gray-800'
             }`}
           >
             {label}

@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import data from '../data/mockNodeData.json';
 
-import NodeSelector from './NodeSelector';
-import RewardChart from './RewardChart';
-import RegretChart from './RegretChart';
-import PromptViewer from './PromptViewer';
-import ConsensusViewer from './ConsensusViewer';
-import CritiqueViewer from './CritiqueViewer';
-import AnswerLengthChart from './AnswerLengthChart';
+import NodeSelector from '../components/NodeSelector';
+import RewardChart from '../components/RewardChart';
+import RegretChart from '../components/RegretChart';
+import AnswerLengthChart from '../components/AnswerLengthChart';
+import { useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
   const [selectedNodeIds, setSelectedNodeIds] = useState([data.nodes[0].node_id]);
   const [step, setStep] = useState(1);
   const [isPlaying, setIsPlaying] = useState(false);
+  const navigate = useNavigate();
 
   const handleToggle = (nodeId) => {
     setSelectedNodeIds((prev) =>
@@ -26,10 +25,6 @@ export default function Dashboard() {
     selectedNodeIds.includes(n.node_id)
   );
 
-  const consensusData = data.consensus;
-  const critiqueData = data.critiques;
-
-  // Animation effect
   useEffect(() => {
     let interval;
     if (isPlaying) {
@@ -72,19 +67,22 @@ export default function Dashboard() {
         <RegretChart nodes={selectedNodes} step={step} />
       </div>
 
-      <AnswerLengthChart nodes={selectedNodes} />
+      <AnswerLengthChart nodes={selectedNodes} step={step} />
 
-      {selectedNodes[0] && (
-        <>
-          <PromptViewer answers={selectedNodes[0].answers} />
-          <ConsensusViewer
-            answers={selectedNodes[0].answers}
-            consensus={consensusData}
-          />
-        </>
-      )}
-
-      <CritiqueViewer critiques={critiqueData} />
+      <div className="border-t pt-4 mt-4">
+        <h2 className="text-lg font-semibold mb-2">Explore Individual Nodes</h2>
+        <div className="flex flex-wrap gap-4">
+          {data.nodes.map((node) => (
+            <button
+              key={node.node_id}
+              onClick={() => navigate(`/node-view/${node.node_id}`)}
+              className="text-blue-600 underline text-sm"
+            >
+              View {node.node_id}
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
